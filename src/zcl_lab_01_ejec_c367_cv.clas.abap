@@ -12,24 +12,32 @@ ENDCLASS.
 CLASS zcl_lab_01_ejec_c367_cv IMPLEMENTATION.
   METHOD if_oo_adt_classrun~main.
 **----------------------------------------------------------------
-*8. ALL INSTANCE
-    DATA(go_adm_001) = NEW zcl_lab_48_adm_dep_c367_cv( '1000' ).
-    DATA(go_adm_002) = NEW zcl_lab_48_adm_dep_c367_cv( '1234' ).
-    DATA(go_adm_003) = NEW zcl_lab_48_adm_dep_c367_cv( '2344' ).
+    DATA(lo_warning) = NEW zcl_warning_c367_cv(  ).
+    DATA(lo_sales) = NEW zcl_sales_deparment_c367_cv(  ).
 
-    DATA(go_employee) = NEW zcl_lab_49_employee_c367_cv(  ).
+    SET HANDLER lo_sales->on_notify_department FOR lo_warning.
 
-    go_adm_001->notify_employee(  ).
-    out->write( go_adm_001->log ).
-    out->write( go_employee->log ).
-
-    go_adm_002->notify_employee(  ).
-    out->write( go_adm_002->log ).
-    out->write( go_employee->log ).
-
-    go_adm_003->notify_employee(  ).
-    out->write( go_adm_003->log ).
-    out->write( go_employee->log ).
+    out->write( lo_warning->notify_department(  ) ).
+    out->write( lo_sales->log ).
+**----------------------------------------------------------------
+**8. ALL INSTANCE
+*    DATA(go_adm_001) = NEW zcl_lab_48_adm_dep_c367_cv( '1000' ).
+*    DATA(go_adm_002) = NEW zcl_lab_48_adm_dep_c367_cv( '1234' ).
+*    DATA(go_adm_003) = NEW zcl_lab_48_adm_dep_c367_cv( '2344' ).
+*
+*    DATA(go_employee) = NEW zcl_lab_49_employee_c367_cv(  ).
+*
+*    go_adm_001->notify_employee(  ).
+*    out->write( go_adm_001->log ).
+*    out->write( go_employee->log ).
+*
+*    go_adm_002->notify_employee(  ).
+*    out->write( go_adm_002->log ).
+*    out->write( go_employee->log ).
+*
+*    go_adm_003->notify_employee(  ).
+*    out->write( go_adm_003->log ).
+*    out->write( go_employee->log ).
 
 
 **----------------------------------------------------------------
